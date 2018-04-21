@@ -1,6 +1,7 @@
 package com.jlu.blog.form;
 
 import com.jlu.blog.model.User;
+import com.jlu.blog.utils.RegexUtil;
 
 import javax.validation.constraints.Size;
 import java.util.regex.Pattern;
@@ -47,14 +48,12 @@ public class UserForm {
     }
 
     public User getUser() {
-
-
         if (confirm == null || confirm.equals(password)) {
             User user = new User();
             user.setPassword(password);
-            if (Pattern.matches("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$", info))
+            if (Pattern.matches(RegexUtil.PHONE, info))
                 user.setEmail(info);
-            else if (Pattern.matches("^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", info))
+            else if (Pattern.matches(RegexUtil.EMAIL, info))
                 user.setPhone(info);
             return user;
         }

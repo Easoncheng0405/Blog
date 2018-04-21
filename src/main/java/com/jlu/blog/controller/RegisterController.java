@@ -5,13 +5,14 @@ import com.jlu.blog.model.User;
 import com.jlu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created with IDEA
@@ -37,9 +38,9 @@ public class RegisterController {
 
     @PostMapping
     @ResponseBody
-    public String post(UserForm form) {
+    public String post(@Valid UserForm form, BindingResult result) {
         User user = form.getUser();
-        if (user == null)
+        if (user == null||result.hasErrors())
             return "输入的信息有误！";
         if (user.getEmail() != null && userService.findOneByEmail(user.getEmail()) != null)
             return "邮箱已经被使用了！";
