@@ -12,13 +12,16 @@ import java.util.List;
  */
 public interface UserService {
 
-    User save(User user);
+    User register(User user);
 
-    User findOne(long id);
+
+    User loginByEmail(String email,String password);
+
+    User loginByPhone(String phone,String password);
 
     User findOneByEmail(String email);
 
-    User findOneByPhone(long phone);
+    User findOneByPhone(String phone);
 
     List<User> findAll();
 

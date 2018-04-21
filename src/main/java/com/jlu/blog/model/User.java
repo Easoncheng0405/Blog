@@ -16,10 +16,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false,unique = true,length = 25)
+    @Column(unique = true,length = 25)
     private String email;
 
-    @Column(nullable = false,unique = true,length = 15)
+    @Column(unique = true,length = 15)
     private String phone;
 
     @Column(nullable = false,length = 25)
@@ -87,5 +87,10 @@ public class User {
         result = 31 * result + email.hashCode();
         result = 31 * result + phone.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString(){
+        return "[email:"+email+" | phone:"+phone+" | password:"+password+"]";
     }
 }

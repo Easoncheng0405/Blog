@@ -1,5 +1,6 @@
 package com.jlu.blog.controller;
 
+import com.jlu.blog.form.UserForm;
 import com.jlu.blog.model.User;
 import com.jlu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +26,27 @@ public class RegisterController {
     private final UserService userService;
 
     @Autowired
-    public RegisterController(UserService userService){
-        this.userService=userService;
+    public RegisterController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
-    @ResponseBody
-    public List<User> get(){
-        User user=new User();
-        user.setCreateTime(new Date());
-        user.setEmail("597021782@qq.com");
-        user.setPassword("cc123456");
-        user.setPhone("15843132084");
-        userService.save(user);
-        return userService.findAll();
+    public String get() {
+        return "register";
     }
 
     @PostMapping
-    public String post(){
-        return "";
+    @ResponseBody
+    public String post(UserForm form) {
+        User user = form.getUser();
+        if (user == null)
+            return "输入的信息有误！";
+        if (user.getEmail() != null && userService.findOneByEmail(user.getEmail()) != null)
+            return "邮箱已经被使用了！";
+        if (user.getPhone() != null && userService.findOneByPhone(user.getPhone()) != null)
+            return "电话号已经被使用了！";
+        user.setCreateTime(new Date());
+        return userService.register(user).toString();
+
     }
 }

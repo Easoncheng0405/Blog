@@ -26,23 +26,29 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User save(User user) {
+    public User register(User user) {
         return userRepository.save(user);
     }
 
+
     @Override
-    public User findOne(long id) {
-        return userRepository.getOne(id);
+    public User loginByEmail(String email, String password) {
+        return userRepository.findByEmailAndPassword(email,password);
+    }
+
+    @Override
+    public User loginByPhone(String phone, String password) {
+        return userRepository.findByPhoneAndPassword(phone, password);
     }
 
     @Override
     public User findOneByEmail(String email) {
-        return null;
+        return userRepository.findByEmail(email);
     }
 
     @Override
-    public User findOneByPhone(long phone) {
-        return null;
+    public User findOneByPhone(String phone) {
+        return userRepository.findByPhone(phone);
     }
 
     @Override
