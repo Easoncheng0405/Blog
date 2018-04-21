@@ -6,6 +6,8 @@ import com.jlu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created with IDEA
  * author:程杰
@@ -41,5 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findOneByPhone(long phone) {
         return null;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

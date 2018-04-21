@@ -2,6 +2,8 @@ package com.jlu.blog.service;
 
 import com.jlu.blog.model.User;
 
+import java.util.List;
+
 /**
  * Created with IDEA
  * author:程杰
@@ -18,5 +20,6 @@ public interface UserService {
 
     User findOneByPhone(long phone);
 
+    List<User> findAll();
 
 }

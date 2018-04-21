@@ -1,6 +1,7 @@
 package com.jlu.blog.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created with IDEA
@@ -15,13 +16,58 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false,unique = true,length = 25)
     private String email;
 
-    private long phone;
+    @Column(nullable = false,unique = true,length = 15)
+    private String phone;
 
+    @Column(nullable = false,length = 25)
     private String password;
 
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCreateTime(Date createTime){
+        this.createTime=createTime;
+    }
+
+    public Date getCreateTime(){
+        return this.createTime;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -31,17 +77,15 @@ public class User {
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (phone != user.phone) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        return password != null ? password.equals(user.password) : user.password == null;
+        if (!email.equals(user.email)) return false;
+        return phone.equals(user.phone);
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (int) (phone ^ (phone >>> 32));
-        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + email.hashCode();
+        result = 31 * result + phone.hashCode();
         return result;
     }
 }
