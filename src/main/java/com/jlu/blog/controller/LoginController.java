@@ -5,12 +5,11 @@ import com.jlu.blog.model.User;
 import com.jlu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -31,24 +30,29 @@ public class LoginController {
     }
 
     @GetMapping
-    public String get() {
+    public String get(Model model) {
+        model.addAttribute("user", new User());
         return "login";
     }
 
     @PostMapping
-    @ResponseBody
-    public String post(@Valid UserForm form, BindingResult result) {
-        User user = form.getUser();
-        if (user == null||result.hasErrors())
-            return "输入的信息有误！";
-        if (user.getPhone() != null)
-            user = userService.loginByPhone(user.getPhone(), user.getPassword());
+    public String post(Model model, @ModelAttribute("user") @Valid UserForm form,
+                       BindingResult result, HttpSession session,
+                       @RequestParam(value = "next", required = false) String next) {
+        if (result.hasErrors()) {
+            model.addAttribute("fields", result);
+            return "login";
+        }
+        User user = userService.loginByEmail(form.getEmail(), form.getPassword());
+        if (user == null) {
+            model.addAttribute("message", "用户名或密码错误");
+            return "login";
+        }
+        session.setAttribute("CURRENT_USER", user);
+        if (next == null || next.trim().equals(""))
+            return "redirect:/";
         else
-            user = userService.loginByEmail(user.getEmail(), user.getPassword());
-        if(user==null)
-            return "用户名或密码错误";
-        else
-            return user.toString();
+            return "redirect:" + next;
     }
 
 }

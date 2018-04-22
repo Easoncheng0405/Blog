@@ -5,12 +5,11 @@ import com.jlu.blog.model.User;
 import com.jlu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Date;
 
@@ -32,22 +31,30 @@ public class RegisterController {
     }
 
     @GetMapping
-    public String get() {
+    public String get(Model model) {
+        model.addAttribute("user", new UserForm());
         return "register";
     }
 
     @PostMapping
-    @ResponseBody
-    public String post(@Valid UserForm form, BindingResult result) {
+    public String post(Model model, @ModelAttribute("user") @Valid UserForm form,
+                       BindingResult result, HttpSession session) {
+        if (result.hasErrors()) {
+            model.addAttribute("fields", result);
+            return "register";
+        }else if (!form.getPassword().equals(form.getConfirm())) {
+            result.rejectValue("confirm","两次密码不一致");
+            model.addAttribute("fields", result);
+            return "register";
+        }else if(userService.findOneByEmail(form.getEmail())!=null){
+            model.addAttribute("message","这个邮箱地址已被注册了");
+            return "register";
+        }
         User user = form.getUser();
-        if (user == null||result.hasErrors())
-            return "输入的信息有误！";
-        if (user.getEmail() != null && userService.findOneByEmail(user.getEmail()) != null)
-            return "邮箱已经被使用了！";
-        if (user.getPhone() != null && userService.findOneByPhone(user.getPhone()) != null)
-            return "电话号已经被使用了！";
+        user.setEmail(user.getEmail());
         user.setCreateTime(new Date());
-        return userService.register(user).toString();
+        session.setAttribute("CURRENT_USER",userService.register(user));
+        return "redirect:/";
 
     }
 }

@@ -16,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(unique = true,length = 25)
+    @Column(nullable = false,unique = true,length = 25)
     private String email;
 
     @Column(unique = true,length = 15)
@@ -76,16 +76,14 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
         if (!email.equals(user.email)) return false;
-        return phone.equals(user.phone);
+        return password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + email.hashCode();
-        result = 31 * result + phone.hashCode();
+        int result = email.hashCode();
+        result = 31 * result + password.hashCode();
         return result;
     }
 

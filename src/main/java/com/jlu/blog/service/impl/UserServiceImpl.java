@@ -37,11 +37,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User loginByPhone(String phone, String password) {
-        return userRepository.findByPhoneAndPassword(phone, password);
-    }
-
-    @Override
     public User findOneByEmail(String email) {
         return userRepository.findByEmail(email);
     }

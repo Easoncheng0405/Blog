@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
     <head>
 
@@ -55,15 +55,21 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="" method="post" class="login_assets-form">
+			                    <form role="form" th:object="${user}" method="post" class="login_assets-form">
+                                    <div th:if="${message}" class="alert alert-warning">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong th:text="${message}"></strong>
+                                    </div>
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">邮箱或手机号码</label>
-			                        	<input type="text" name="info" placeholder="邮箱或手机号码" class="form-username form-control" id="form-username">
-			                        </div>
+                                        <input type="text" name="email" placeholder="邮箱地址" class="form-username form-control" id="form-username">
+                                        <p th:if="${#fields.hasErrors('email')}">这不是一个有效的邮箱地址</p>
+                                    </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">密码</label>
 			                        	<input type="password" name="password" placeholder="输入您的密码" class="form-password form-control" id="form-password">
-			                        </div>
+                                        <p th:if="${#fields.hasErrors('password')}">密码长度为6~25位之间</p>
+                                    </div>
 			                        <button type="submit" class="btn">OK!</button>
 			                    </form>
 		                    </div>

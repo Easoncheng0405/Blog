@@ -15,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/createBlog");
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/createBlog")
+                .addPathPatterns("/home");
     }
 }
