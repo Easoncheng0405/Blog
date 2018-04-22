@@ -52,6 +52,7 @@ local.properties
 .recommenders
 
 # IDEA
+/.idea/
 .idea
 *.iml
 *.ipr
