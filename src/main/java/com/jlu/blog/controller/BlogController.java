@@ -1,8 +1,14 @@
 package com.jlu.blog.controller;
 
+
+import com.jlu.blog.service.BlogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created with IDEA
@@ -14,8 +20,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/blog")
 public class BlogController {
 
+    private final BlogService blogService;
+
+    @Autowired
+    public BlogController(BlogService blogService){
+        this.blogService=blogService;
+    }
+
     @GetMapping
-    public String get(){
+    public String get(Model model, HttpServletRequest request){
+        model.addAttribute("state","hello world");
+        model.addAttribute("blog",blogService.findOne(17));
         return "blog";
     }
 }
