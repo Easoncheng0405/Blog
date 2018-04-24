@@ -15,10 +15,10 @@ public class BlogForm {
     @Size(min = 1, max = 25)
     private String title;
 
-    @Size(min = 15, max = 150)
+    @Size(min = 15, max = 500)
     private String description;
 
-    @Size(min = 50,max = 1500)
+    @Size(min = 50,max = 10000)
     private String content;
 
     public String getTitle() {

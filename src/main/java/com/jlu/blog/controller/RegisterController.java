@@ -3,6 +3,7 @@ package com.jlu.blog.controller;
 import com.jlu.blog.form.UserForm;
 import com.jlu.blog.model.User;
 import com.jlu.blog.service.UserService;
+import com.jlu.blog.utils.CreateRandomField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,6 +54,7 @@ public class RegisterController {
         User user = form.getUser();
         user.setEmail(user.getEmail());
         user.setCreateTime(new Date());
+        user.setName(CreateRandomField.getRandomName());
         session.setAttribute("CURRENT_USER",userService.register(user));
         return "redirect:/";
 

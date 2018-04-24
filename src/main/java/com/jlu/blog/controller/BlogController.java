@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,9 +29,8 @@ public class BlogController {
     }
 
     @GetMapping
-    public String get(Model model, HttpServletRequest request){
-        model.addAttribute("state","hello world");
-        model.addAttribute("blog",blogService.findOne(17));
+    public String get(Model model,@RequestParam("id")long id){
+        model.addAttribute("blog",blogService.findOne(id));
         return "blog";
     }
 }

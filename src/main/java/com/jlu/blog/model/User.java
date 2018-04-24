@@ -16,14 +16,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false,unique = true,length = 25)
+    @Column(nullable = false, unique = true, length = 25)
     private String email;
 
-    @Column(unique = true,length = 15)
+    @Column(unique = true, length = 15)
     private String phone;
 
-    @Column(nullable = false,length = 25)
+    @Column(nullable = false, length = 25)
     private String password;
+
+    @Column(nullable = false, length = 25)
+    private String name;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,6 +52,14 @@ public class User {
         return phone;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -61,11 +72,11 @@ public class User {
         this.password = password;
     }
 
-    public void setCreateTime(Date createTime){
-        this.createTime=createTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getCreateTime(){
+    public Date getCreateTime() {
         return this.createTime;
     }
 
@@ -88,7 +99,7 @@ public class User {
     }
 
     @Override
-    public String toString(){
-        return "[email:"+email+" | phone:"+phone+" | password:"+password+"]";
+    public String toString() {
+        return "[email:" + email + " | phone:" + phone + " | password:" + password + " | name" + name + "]";
     }
 }

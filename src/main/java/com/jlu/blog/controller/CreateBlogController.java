@@ -43,7 +43,7 @@ public class CreateBlogController {
     public String post(HttpSession session, @ModelAttribute("blog")@Validated BlogForm form,
                        BindingResult result, Model model){
         if(result.hasErrors()){
-            for(ObjectError error:result.getAllErrors()){
+            for(ObjectError error:result.getAllErrors()) {
                 System.out.println(form.getContent().length());
                 System.out.println(form.getDescription().length());
                 System.out.println(error.toString());

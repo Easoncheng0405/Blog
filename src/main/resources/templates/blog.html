@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/highlight.css">
     <script src="/lib/jquery.min.js"></script>
     <script src='/lib/marked.min.js'></script>
+    <script src='/lib/blog.js'></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 
@@ -19,23 +20,53 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
+            <button type="button" style="height: 35px" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only" >Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Lorem 的博客</a>
+            <a class="navbar-brand" href="#" style="padding-top: 15px">Blog</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="about.html">首页</a></li>
-                <li><a href="#">最近</a></li>
-                <li><a href="#">归档</a></li>
-                <li><a href="#">关于</a></li>
+                <li>
+                    <a href="/home">我的首页</a>
+                </li>
+                <li>
+                    <a href="/createBlog">创建博客</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">管理</li>
+                        <li>
+                            <a href="#">博客信息</a>
+                        </li>
+                        <li>
+                            <a href="#">创建博文</a>
+                        </li>
+                        <li>
+                            <a href="#">博客管理</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">账号</li>
+                        <li>
+                            <a href="#">更改密码</a>
+                        </li>
+                        <li>
+                            <a href="#">退出登录</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="搜索...">
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-addon">go!</span>
+                </div>
             </form>
         </div>
     </div>
@@ -47,22 +78,37 @@
 
         <div class="col-sm-8 blog-item">
             <div class="page-header">
-                <p class="blog-post-meta">2015年2月3日 标签：<a href="#">Web开发</a></p>
+                <p class="blog-post-meta" th:text="创建于+ ${#dates.format(blog.date, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                <a>标签: </a><span class="label label-primary tag" href="\">MarkDown</span>
             </div>
             <div class="post-content">
-                <h1 th:text="${blog.title}"></h1>
+                <h1 id="title" th:text="${blog.title}"></h1>
                 <h4 th:text="${blog.description}"></h4>
-                <script type="text/javascript">
-                    var state = '${state}';
-                    alert(state);
-                </script>
-                <div id="content">
-
-                </div>
+                <br>
+                <hr/>
+                <div id="content"></div>
             </div>
-
             <nav>
                 <ul class="pager">
+                    <script>
+                        function getQueryString(name) {
+                            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                            var r = window.location.search.substr(1).match(reg);
+                            if (r != null) return unescape(r[2]); return null;
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "/getContent",
+                            dataType: "json",
+                            data: "id="+getQueryString('id'),
+                            success: function (data) {
+                                $('#content').html(marked(data['content']));
+                            },
+                            error: function () {
+                                alert('error');
+                            }
+                        });
+                    </script>
                     <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
                     <li class="next"><a href="#">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
                 </ul>
@@ -106,13 +152,11 @@
                 <div class="avatar">
                     <img class="img-circle img-rounded img-thumbnail avatar" src="/img/catty.jpeg">
                     <div>
-                        <h4>Lorem</h4>
-                        <a>lorem@example.com</a>
+                        <h4 th:text="${blog.user.name}"></h4>
+                        <a th:text="${blog.user.email}"></a>
                     </div>
                 </div>
-                <p>Ornare sapien rhoncus, nec mi hendrerit. Ante aliquam dui arcu, diam sodales erat felis dolor sed in,
-                    nec
-                    placerat non.</p>
+                <p>他很懒，还没来得及写自我介绍</p>
             </div>
             <div class="sidebar-module">
                 <h4>归档</h4>

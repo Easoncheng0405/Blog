@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>HOME</title>
     <meta charset="utf-8"/>
@@ -60,12 +60,7 @@
                 </li>
             </ul>
             <form class="navbar-form navbar-right">
-                <div class="input-group">
-                    <input type="text" style="width: 300px;background: white">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" style="height: 38.5px">Go!</button>
-                    </span>
-                </div>
+                <input type="text" placeholder="按下回车以搜索" style="background: white">
             </form>
         </div>
     </div>
@@ -117,13 +112,10 @@
                 <img src="img/pic01.jpg" alt=""/>
             </div>
             <div class="content">
-                <h3>Spring MVC</h3>
-                <p>Spring MVC属于SpringFrameWork的后续产品，已经融合在Spring Web Flow里面。Spring
-                    框架提供了构建 Web 应用程序的全功能 MVC 模块。
-                    使用 Spring 可插入的 MVC 架构，从而在使用Spring进行WEB开发时，
-                    可以选择使用Spring的SpringMVC框架或集成其他MVC开发框架，如Struts1(现在一般不用)，Struts2等.</p>
+                <h3 th:text="${one.title}"></h3>
+                <p th:text="${one.description}"></p>
                 <ul class="actions">
-                    <li><a href="#" class="button alt">更多内容</a></li>
+                    <li><a th:href="${href1}" class="button alt">更多内容</a></li>
                 </ul>
             </div>
         </div>
@@ -132,12 +124,10 @@
                 <img src="img/pic02.jpg" alt=""/>
             </div>
             <div class="content">
-                <h3>Java Persistence API</h3>
-                <p>JPA是Java Persistence API的简称，中文名Java持久层API，是JDK 5.0注解或XML描述对象－关系表的映射关系，
-                    并将运行期的实体对象持久化到数据库中。 Sun引入新的JPA ORM规范出于两个原因：其一，
-                    简化现有Java EE和Java SE应用开发工作；其二，Sun希望整合ORM技术，实现天下归一</p>
+                <h3 th:text="${two.title}"></h3>
+                <p th:text="${two.description}"></p>
                 <ul class="actions">
-                    <li><a href="#" class="button alt">更多内容</a></li>
+                    <li><a th:href="${href2}" class="button alt">更多内容</a></li>
                 </ul>
             </div>
         </div>
@@ -146,18 +136,15 @@
                 <img src="img/pic03.jpg" alt=""/>
             </div>
             <div class="content">
-                <h3>认识与入门MarkDown</h3>
-                <p>Markdown 是一种轻量级的「标记语言」，它的优点很多，目前也被越来越多的写作爱好者，
-                    撰稿者广泛使用。看到这里请不要被「标记」、「语言」所迷惑，Markdown 的语法十分简单。
-                    常用的标记符号也不超过十个，这种相对于更为复杂的HTML 标记语言来说，Markdown 可谓是十分轻量的
-                    ，学习成本也不需要太多，且一旦熟悉这种语法规则，会有一劳永逸的效果。</p>
+                <h3 th:text="${three.title}"></h3>
+                <p th:text="${three.description}"></p>
                 <ul class="actions">
-                    <li><a href="#" class="button alt">更多内容</a></li>
+                    <li><a th:href="${href3}" class="button alt">更多内容</a></li>
                 </ul>
             </div>
         </div>
         <ul class="actions special">
-            <li><a href="#" class="button alt">马上创作您自己的博客！</a></li>
+            <li><a href="/createBlog" class="button alt">马上创作您自己的博客！</a></li>
         </ul>
     </div>
 </section>
@@ -168,7 +155,7 @@
         <section>
             <h2>联系我们</h2>
             <p>告诉我们您的想法或者建议，我们会尽快回复您！</p>
-            <form action="#" class="alt" method="POST">
+            <form action="/" class="alt" method="POST">
                 <div class="row uniform">
                     <div class="6u 12u$(xsmall)">
                         <input name="name" placeholder="如何称呼您" type="text">

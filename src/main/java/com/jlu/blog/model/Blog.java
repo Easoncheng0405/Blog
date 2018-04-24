@@ -16,15 +16,15 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(length = 25,nullable = false)
+    @Column(length = 50,nullable = false)
     private String title;
 
-    @Column(length = 150,nullable = false)
+    @Column(length = 500,nullable = false)
     private String description;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(nullable = false,length = 1500)
+    @Column(nullable = false,length = 10000)
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)

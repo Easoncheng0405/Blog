@@ -1,4 +1,6 @@
-$(document).ready.$(document).ready(function () {
-    alert('123');
-    $('#content').html(marked($('${blog.content}').val()));
+$(document).ready(function () {
+    $('#hide').bind('input propertychange', function () {
+        $('#preview').html(marked($('#hide').val()));
+    })
+        .trigger('input');
 });
