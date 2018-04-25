@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <title>Cum sociis</title>
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/bootstrap.min.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/sidbar.css">
     <link rel="stylesheet" href="/css/blog.css">
     <link rel="stylesheet" href="/css/highlight.css">
     <script src="/lib/jquery.min.js"></script>
     <script src='/lib/marked.min.js'></script>
-    <script src='/lib/blog.js'></script>
-    <script src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -79,7 +78,7 @@
         <div class="col-sm-8 blog-item">
             <div class="page-header">
                 <p class="blog-post-meta" th:text="创建于+ ${#dates.format(blog.date, 'yyyy-MM-dd HH:mm:ss')}"></p>
-                <a>标签: </a><span class="label label-primary tag" href="\">MarkDown</span>
+                <strong>标签: </strong><span class="label label-primary tag" href="\">MarkDown</span>
             </div>
             <div class="post-content">
                 <h1 id="title" th:text="${blog.title}"></h1>
@@ -150,7 +149,7 @@
         <div class="col-sm-3 col-sm-offset-1">
             <div class="sidebar-module sidebar-module-inset">
                 <div class="avatar">
-                    <img class="img-circle img-rounded img-thumbnail avatar" src="/img/catty.jpeg">
+                    <img class="img-rounded img-thumbnail avatar" src="/img/1.png">
                     <div>
                         <h4 th:text="${blog.user.name}"></h4>
                         <a th:text="${blog.user.email}"></a>
@@ -159,18 +158,14 @@
                 <p>他很懒，还没来得及写自我介绍</p>
             </div>
             <div class="sidebar-module">
-                <h4>归档</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">2015年03月</a></li>
-                    <li><a href="#">2015年02月</a></li>
-                    <li><a href="#">2015年01月</a></li>
-                    <li><a href="#">2014年12月</a></li>
-                    <li><a href="#">2014年11月</a></li>
-                    <li><a href="#">2014年10月</a></li>
-                    <li><a href="#">2014年09月</a></li>
-                    <li><a href="#">2014年08月</a></li>
-                    <li><a href="#">2014年07月</a></li>
-                </ol>
+                <h4>文章分类</h4>
+                <ul>
+                    <li><a href="/" style="font-size: 16px;">Java</a></li>
+                    <li><a href="/" style="font-size: 16px;">C++</a></li>
+                    <li><a href="/" style="font-size: 16px;">Python</a></li>
+                    <li><a href="/" style="font-size: 16px;">JavaScript</a></li>
+                    <li><a href="/" style="font-size: 16px;">PHP</a></li>
+                </ul>
             </div>
         </div>
 
