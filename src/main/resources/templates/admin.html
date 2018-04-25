@@ -55,6 +55,18 @@
                     </ul>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/home">登陆</a>
+                </li>
+                <li>
+                    <a href="/createBlog">注册</a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-target="#myModal"> <span class="badge pull-right"
+                                                                         style="background: red">42</span>评论</a>
+                </li>
+            </ul>
             <form class="navbar-form navbar-right">
                 <div class="input-group">
                     <input type="text" class="form-control">
@@ -63,9 +75,58 @@
             </form>
         </div>
     </div>
+
 </nav>
 
 <div class="container" style="padding-top: 50px">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">历史消息(
+                        <small>为你保存最多120条消息记录</small>
+                        )
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div id="selectTree" class="ztree" style="height:260px;overflow:auto; ">
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            还没有收到任何评论呢！<a href="#">(了解如何使用MarkDown书写出层次分明，结构清晰的文章)</a>
+                        </div>
+                        <div style="text-align: center">
+                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
+                                    href="#">认识与入门MarkDown</a>中评论了你</p>
+                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
+                                    href="#">认识与入门MarkDown</a>中评论了你</p>
+                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
+                                    href="#">认识与入门MarkDown</a>中评论了你</p>
+                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
+                                    href="#">认识与入门MarkDown</a>中评论了你</p>
+                            <p><span class="badge" style="background: red">未读</span><a href="#">Tyler-Smith</a>在文章 <a
+                                    href="#">认识与入门MarkDown</a>中评论了你</p>
+                            <p><span class="badge" style="background: green">已读</span><a href="#">Tyler-Smith</a>在文章 <a
+                                    href="#">认识与入门MarkDown</a>中评论了你</p>
+                            <ul class="pagination">
+                                <li><a href="#">&laquo;</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="disabled"><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">全部设为已读</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
     <div class="page-header">
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
