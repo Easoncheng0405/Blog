@@ -20,4 +20,5 @@ public interface BlogRepository extends JpaRepository<Blog,Long> {
 
     List<Blog> findByUser(User user);
 
+
 }
